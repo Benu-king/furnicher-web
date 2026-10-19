@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Amen Furniture</title>
+<link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,wght@0,400;0,500;1,400&family=Jost:wght@300;400&display=swap" rel="stylesheet">
+<style>
+:root{color-scheme:dark;--bg:#080f0e;--ink:#f2f0ea;--mute:#9fada8;--gold:#dcc691;--line:rgba(220,198,145,.25);box-sizing:border-box}
+*{box-sizing:border-box;margin:0}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{background:var(--bg);color:var(--ink);font:300 clamp(15px,1.6vw,17px)/1.7 Jost,system-ui,sans-serif;transition:background 1s;overflow-x:hidden}
+#c{position:fixed;inset:0;width:100%;height:100%;z-index:0;touch-action:pan-y}
+nav{position:fixed;top:0;left:0;right:0;z-index:5;display:flex;justify-content:space-between;align-items:center;gap:12px;padding:calc(16px + env(safe-area-inset-top,0px)) max(5vw,env(safe-area-inset-right,0px)) 16px max(5vw,env(safe-area-inset-left,0px));background:linear-gradient(var(--bg),transparent)}
+.logo{font:500 clamp(17px,2.4vw,24px) 'Bodoni Moda',serif;letter-spacing:.2em;color:var(--ink);text-decoration:none}
+nav div{display:flex;gap:clamp(12px,2.6vw,30px)}
+nav div a{color:var(--mute);text-decoration:none;font-size:clamp(11px,1.5vw,14px);letter-spacing:.08em;padding:6px 0 4px;border-bottom:1px solid transparent;transition:.3s;white-space:nowrap}
+nav div a:hover,nav div a[aria-current]{color:var(--gold);border-color:var(--gold)}
+nav a:focus-visible{outline:1px solid var(--gold);outline-offset:4px}
+section{position:relative;z-index:2;min-height:100vh;min-height:100svh;display:flex;align-items:center;padding:110px max(5vw,env(safe-area-inset-right,0px)) 140px max(5vw,env(safe-area-inset-left,0px));background:linear-gradient(90deg,rgba(8,15,14,.88),rgba(8,15,14,0) 75%)}
+section.r{background:linear-gradient(270deg,rgba(8,15,14,.88),rgba(8,15,14,0) 75%)}
+.col{width:min(540px,100%)}
+.r .col{margin-left:auto}
+h1,h2{font:400 clamp(38px,6vw,84px)/1.06 'Bodoni Moda',serif}
+h2{font-size:clamp(32px,4.2vw,56px);margin-bottom:24px}
+h1 i{color:var(--gold)}
+p{color:var(--mute);max-width:46ch}
+.lead{margin:24px 0 32px;font-size:1.12em}
+.btn{display:inline-block;padding:14px 28px;border:1px solid var(--gold);color:var(--gold);background:none;text-decoration:none;font:400 14px Jost;letter-spacing:.14em;cursor:pointer;transition:.3s;margin:0 10px 10px 0;min-height:44px}
+.btn.f{background:var(--gold);color:#0a110f}
+.btn:hover,.btn:focus-visible{background:var(--ink);border-color:var(--ink);color:#0a110f;outline:none}
+.item{padding:20px 0;border-top:1px solid var(--line);display:grid;grid-template-columns:1fr auto;gap:2px 20px;transition:padding .35s}
+.item:last-of-type{border-bottom:1px solid var(--line)}
+.item:hover{padding-left:14px}
+.item h3,.k h3{font:500 clamp(20px,2.6vw,25px) 'Bodoni Moda',serif}
+.item span{color:var(--gold);font-size:14px;align-self:center}
+.item p{grid-column:1/-1;font-size:.95em}
+.k{padding:0 0 20px 20px;border-left:1px solid var(--gold);margin-bottom:6px}
+.k p{font-size:.95em}
+input,textarea{width:100%;background:rgba(255,255,255,.05);border:1px solid var(--line);color:var(--ink);font:inherit;font-size:16px;padding:13px 14px;margin-bottom:14px;border-radius:0}
+input:focus,textarea:focus{outline:1px solid var(--gold)}
+label{font-size:12px;color:var(--mute);letter-spacing:.1em}
+footer{position:relative;z-index:2;padding:26px 5vw 120px;font-size:13px;color:var(--mute);border-top:1px solid var(--line);background:var(--bg)}
+.bar{position:fixed;z-index:6;left:50%;transform:translateX(-50%);bottom:calc(14px + env(safe-area-inset-bottom,0px));display:flex;gap:6px 16px;align-items:center;padding:8px 18px;background:rgba(8,15,14,.82);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border:1px solid var(--line);border-radius:30px;width:max-content;max-width:94vw;flex-wrap:wrap;justify-content:center}
+.bar b{font-weight:400;font-size:11px;color:var(--mute);letter-spacing:.1em}
+.sw{width:28px;height:28px;border-radius:50%;border:2px solid transparent;cursor:pointer;padding:0}
+.sw[aria-pressed=true]{border-color:var(--gold)}
+.mood{background:none;border:0;color:var(--mute);font:inherit;font-size:13px;cursor:pointer;padding:8px 5px}
+.mood[aria-pressed=true]{color:var(--gold);text-decoration:underline;text-underline-offset:6px}
+.sw:focus-visible,.mood:focus-visible{outline:1px solid var(--gold);outline-offset:3px}
+.intro{animation:in 1.4s .3s both cubic-bezier(.2,.7,.2,1)}
+@keyframes in{from{opacity:0;transform:translateY(26px)}to{opacity:1;transform:none}}
+@media(max-width:900px),(orientation:portrait){
+ section,section.r{align-items:flex-end;padding-top:90px;background:linear-gradient(rgba(8,15,14,0) 0,rgba(8,15,14,.9) 45%)}
+ .r .col{margin-left:0}
+}
+@media(max-width:520px){.bar{gap:2px 10px;padding:6px 12px}.bar b{display:none}nav div{gap:11px}.btn{padding:13px 22px}}
+@media(max-height:500px) and (orientation:landscape){section{min-height:140vh}.bar{display:none}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.intro{animation:none}}
+</style>
+</head>
+<body>
+<canvas id="c" aria-label="3D sofa and floor lamp"></canvas>
+<nav><a class="logo" href="#home">AMEN</a><div><a href="#home">Home</a><a href="#collection">Collection</a><a href="#showroom">Showroom</a><a href="#contact">Contact</a></div></nav>
+
+<main>
+<section id="home"><div class="col intro">
+<h1>Furniture for <i>quiet</i> luxury.</h1>
+<p class="lead">Handmade sofas, chairs and lighting from Amen Furniture in Addis Ababa. Scroll to turn the sofa, change its fabric and switch on the lamp.</p>
+<a class="btn f" href="#collection">VIEW COLLECTION</a><a class="btn" href="#showroom">VISIT SHOWROOM</a>
+</div></section>
+
+<section class="r" id="collection"><div class="col">
+<h2>The collection</h2>
+<div class="item"><h3>Selam Sofa</h3><span>Three seats</span><p>Hardwood frame, deep cushions and brass feet. Made to order in four fabrics.</p></div>
+<div class="item"><h3>Gojo Armchair</h3><span>Reading chair</span><p>A low, wide chair with a curved back for long evenings.</p></div>
+<div class="item"><h3>Abay Dining Table</h3><span>Seats eight</span><p>Solid wood top with a hand-rubbed finish and a slim brass inlay.</p></div>
+<div class="item"><h3>Nur Floor Lamp</h3><span>Warm light</span><p>A slim brass stem with a soft glowing shade. Try the lamp switch below.</p></div>
+</div></section>
+
+<section id="showroom"><div class="col">
+<h2>The showroom</h2>
+<div class="k"><h3>Try every piece</h3><p>Sit on the sofas, feel each fabric and see the lamps lit.</p></div>
+<div class="k"><h3>Private appointments</h3><p>Book a quiet hour with a designer. Bring a photo of your room.</p></div>
+<div class="k"><h3>Find us</h3><p>Addis Ababa, Ethiopia<br>Monday to Saturday, 9:00 to 18:00</p></div>
+<a class="btn f" href="#contact">BOOK A VISIT</a>
+</div></section>
+
+<section class="r" id="contact"><div class="col">
+<h2>Contact us</h2>
+<p style="margin-bottom:20px">Phone: +251 000 000 000<br>Email: hello@amenfurniture.com</p>
+<form id="f"><label for="n">NAME</label><input id="n" autocomplete="name" required><label for="p">PHONE</label><input id="p" type="tel" autocomplete="tel"><label for="m">WHAT ARE YOU LOOKING FOR?</label><textarea id="m" rows="3" required></textarea><button class="btn f" type="submit">SEND MESSAGE</button></form><div id="st" role="status" style="margin-top:16px;color:var(--mute)"></div>
+</div></section>
+</main>
+<footer>© 2026 Amen Furniture. All rights reserved.</footer>
+
+<div class="bar" role="group" aria-label="Customise the scene">
+<b>FABRIC</b><span id="sws" style="display:flex;gap:9px"></span>
+<b>LIGHT</b><span><button class="mood" data-m="evening" aria-pressed="true">Evening</button><button class="mood" data-m="day" aria-pressed="false">Daylight</button><button class="mood" data-m="gallery" aria-pressed="false">Gallery</button></span>
+<button class="mood" id="lamp" aria-pressed="true">Lamp on</button>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script>
+(function(){
+var secs=[].slice.call(document.querySelectorAll('section')),links=[].slice.call(document.querySelectorAll('nav div a'));
+var P=[{a:.5,o:-1.9,h:3.3},{a:1.6,o:1.9,h:3},{a:-.6,o:-1.9,h:2.5},{a:2.7,o:1.9,h:3.6}],act=0;
+function mark(i){links.forEach(function(a,j){a.toggleAttribute('aria-current',i===j)})}mark(0);
+document.getElementById('f').onsubmit=function(e){e.preventDefault();send(m.value+'\nPhone: '+p.value)};
+
+function send(text){var to='wondwosen80@gmail.com',name=n.value,subj='Enquiry from '+name,st=document.getElementById('st');st.textContent='Sending...';
+ fetch('https://formsubmit.co/ajax/'+to,{method:'POST',headers:{'Content-Type':'application/json',Accept:'application/json'},body:JSON.stringify({name:name,message:text,_subject:subj})}).then(function(r){if(!r.ok)throw 0;return r.json()}).then(function(){st.textContent='Thank you. Your message was sent.';document.getElementById('f').reset()}).catch(function(){
+  st.textContent='';var t=document.createElement('p');t.textContent='This page could not send the message directly. Open it in your email with one of the buttons, or copy the text and send it to '+to+'.';
+  var a=document.createElement('a');a.className='btn f';a.target='_blank';a.rel='noopener';a.textContent='OPEN IN GMAIL';a.href='https://mail.google.com/mail/?view=cm&to='+to+'&su='+encodeURIComponent(subj)+'&body='+encodeURIComponent(text);
+  var b=document.createElement('a');b.className='btn';b.target='_blank';b.rel='noopener';b.textContent='OPEN EMAIL APP';b.href='mailto:'+to+'?subject='+encodeURIComponent(subj)+'&body='+encodeURIComponent(text);
+  var x=document.createElement('textarea');x.readOnly=true;x.rows=4;x.value=text;x.onfocus=function(){x.select()};
+  st.append(t,a,b,x)})}
+var cv=document.getElementById('c'),R,T=window.THREE,calm=matchMedia('(prefers-reduced-motion:reduce)').matches;
+try{R=new T.WebGLRenderer({canvas:cv,antialias:true,alpha:true})}catch(e){}
+if(!T||!R){cv.style.display='none';return}
+var small=Math.min(screen.width,screen.height)<700;
+R.setPixelRatio(Math.min(devicePixelRatio,small?1.5:2));R.shadowMap.enabled=true;R.shadowMap.type=T.PCFSoftShadowMap;
+var S=new T.Scene(),C=new T.PerspectiveCamera(36,1,.1,100),G=new T.Group();S.add(G);
+function rs(w,h,r){var s=new T.Shape(),x=-w/2,y=-h/2;s.moveTo(x+r,y);s.lineTo(x+w-r,y);s.quadraticCurveTo(x+w,y,x+w,y+r);s.lineTo(x+w,y+h-r);s.quadraticCurveTo(x+w,y+h,x+w-r,y+h);s.lineTo(x+r,y+h);s.quadraticCurveTo(x,y+h,x,y+h-r);s.lineTo(x,y+r);s.quadraticCurveTo(x,y,x+r,y);return s}
+function part(w,h,d,r,m,x,y,z,rx,rz){var b=r*.7,g=new T.ExtrudeGeometry(rs(w-2*b,h-2*b,r*.5),{depth:d-2*b,bevelEnabled:true,bevelThickness:b,bevelSize:b,bevelSegments:5,curveSegments:6});g.center();var o=new T.Mesh(g,m);o.position.set(x,y,z);o.rotation.x=rx||0;o.rotation.z=rz||0;o.castShadow=o.receiveShadow=true;G.add(o)}
+function cyl(a,b,h,m,x,y,z,open){var o=new T.Mesh(new T.CylinderGeometry(a,b,h,40,1,!!open),m);o.position.set(x,y,z);o.castShadow=!open;G.add(o);return o}
+
+var fabrics=[['Ivory',0xe6e0d4],['Sage',0x62796c],['Navy',0x1f2c40],['Mocha',0x6d5648]];
+var fab=new T.MeshStandardMaterial({color:fabrics[0][1],roughness:.92}),
+    brass=new T.MeshStandardMaterial({color:0xdcc691,roughness:.28,metalness:.85}),
+    acc=new T.MeshStandardMaterial({color:0x2c3a36,roughness:.9}),
+    shade=new T.MeshStandardMaterial({color:0xf3e2bf,emissive:0xffcf8a,emissiveIntensity:1.2,side:T.DoubleSide,roughness:.9});
+part(4.5,.5,1.9,.18,fab,0,.62,0);
+part(4.5,1.15,.5,.2,fab,0,1.3,-.82,-.1);
+part(.6,1.15,2,.2,fab,-2.3,.95,0);
+part(.6,1.15,2,.2,fab,2.3,.95,0);
+for(var i=-1;i<2;i++){part(1.3,1.5,.42,.16,fab,i*1.38,1.0,.05,-Math.PI/2);part(1.3,.98,.4,.16,fab,i*1.38,1.5,-.45,-.22)}
+part(.8,.8,.3,.12,acc,-1.55,1.35,.35,-.3,.35);
+part(.7,.7,.28,.12,new T.MeshStandardMaterial({color:0xdcc691,roughness:.8}),1.6,1.3,.3,-.25,-.3);
+[[-2.1,-.75],[2.1,-.75],[-2.1,.75],[2.1,.75]].forEach(function(p){cyl(.07,.045,.34,brass,p[0],.17,p[1])});
+var LX=3.7,LZ=-.5;
+cyl(.5,.5,.06,brass,LX,.03,LZ);cyl(.03,.03,3.1,brass,LX,1.6,LZ);cyl(.42,.62,.85,shade,LX,3.35,LZ,true);
+var bulb=new T.Mesh(new T.SphereGeometry(.12,16,16),new T.MeshBasicMaterial({color:0xfff1cf}));bulb.position.set(LX,3.3,LZ);G.add(bulb);
+var lampL=new T.PointLight(0xffc27a,0,12,1.6);lampL.position.set(LX,3.3,LZ);G.add(lampL);
+G.position.x=-.6;
+
+var fl=new T.Mesh(new T.CircleGeometry(9,64),new T.MeshStandardMaterial({color:0x0f1a19,roughness:.35,metalness:.3}));fl.rotation.x=-Math.PI/2;fl.receiveShadow=true;S.add(fl);
+var ring=new T.Mesh(new T.RingGeometry(4.8,4.84,96),new T.MeshBasicMaterial({color:0xdcc691,side:T.DoubleSide}));ring.rotation.x=-Math.PI/2;ring.position.y=.01;S.add(ring);
+
+var amb=new T.AmbientLight(0x22343a,.5),spot=new T.SpotLight(0xffe0b0,0,26,.6,.6,1),rim=new T.DirectionalLight(0x5fd0c0,.4);
+spot.position.set(-3,9,5);spot.castShadow=true;spot.shadow.mapSize.set(1024,1024);spot.shadow.bias=-.0005;rim.position.set(5,4,-6);
+S.add(amb,spot,rim,spot.target);
+var M={evening:{a:[0x22343a,.55],s:[0xffd9a0,1.9],r:[0x5fd0c0,.45],bg:'#080f0e'},day:{a:[0xd6e2e6,.95],s:[0xfff6e6,1.4],r:[0xffffff,.6],bg:'#131c1b'},gallery:{a:[0x1a1f1f,.25],s:[0xffffff,3],r:[0x000000,0],bg:'#050909'}};
+var cur=M.evening,lampOn=true,ca=new T.Color(),cs=new T.Color(),cr=new T.Color();
+
+var sw=document.getElementById('sws');
+fabrics.forEach(function(f,i){var b=document.createElement('button');b.className='sw';b.setAttribute('aria-label',f[0]);b.setAttribute('aria-pressed',i==0);b.style.background='#'+('00000'+f[1].toString(16)).slice(-6);b.onclick=function(){fab.color.setHex(f[1]);[].forEach.call(sw.children,function(x){x.setAttribute('aria-pressed',x===b)})};sw.appendChild(b)});
+[].forEach.call(document.querySelectorAll('.mood[data-m]'),function(b){b.onclick=function(){cur=M[b.dataset.m];document.body.style.background=cur.bg;[].forEach.call(document.querySelectorAll('.mood[data-m]'),function(x){x.setAttribute('aria-pressed',x===b)})}});
+var lb=document.getElementById('lamp');lb.onclick=function(){lampOn=!lampOn;lb.setAttribute('aria-pressed',lampOn);lb.textContent=lampOn?'Lamp on':'Lamp off'};
+
+function size(){var w=innerWidth,h=innerHeight;R.setSize(w,h,false);C.aspect=w/h;C.fov=(w/h<1)?46:36;C.updateProjectionMatrix()}
+addEventListener('resize',size);addEventListener('orientationchange',size);size();
+var mx=0,my=0,t0=performance.now(),ang=.5,off=0,hh=3.3,lk=new T.Vector3(),rt=new T.Vector3();
+addEventListener('pointermove',function(e){if(e.pointerType==='mouse'){mx=e.clientX/innerWidth-.5;my=e.clientY/innerHeight-.5}});
+function L(a,b,f){return a+(b-a)*f}
+function tick(now){
+ var el=calm?9:(now-t0)/1000,e=1-Math.pow(1-Math.min(el/3,1),3),w=innerWidth,h0=innerHeight,asp=w/h0,wide=w>900&&asp>1;
+ var best=act;secs.forEach(function(s,i){var r=s.getBoundingClientRect();if(r.top<=h0*.5&&r.bottom>h0*.5)best=i});
+ if(best!==act){act=best;mark(act)}
+ var p=P[act];ang=L(ang,p.a,.04);off=L(off,wide?p.o:0,.04);hh=L(hh,p.h,.04);
+ amb.color.lerp(ca.setHex(cur.a[0]),.05);spot.color.lerp(cs.setHex(cur.s[0]),.05);rim.color.lerp(cr.setHex(cur.r[0]),.05);
+ amb.intensity=L(amb.intensity,cur.a[1],.05);spot.intensity=L(spot.intensity,cur.s[1]*e,.05);rim.intensity=L(rim.intensity,cur.r[1],.05);
+ var lv=lampOn?1:0;lampL.intensity=L(lampL.intensity,lv*(1.2+.08*Math.sin(el*2)),.08);shade.emissiveIntensity=L(shade.emissiveIntensity,lv*1.3,.08);bulb.material.color.setHex(lampOn?0xfff1cf:0x4a4a44);
+ var k=2*Math.tan(C.fov*Math.PI/360),rb=Math.max(10.8,10.4/(k*asp)),r=L(rb*1.5,rb,e),a=ang+mx*.3,h=L(5.5,hh-my*.8,e)*(rb/10.8);
+ C.position.set(Math.sin(a)*r,h,Math.cos(a)*r);lk.set(0,wide?1.3:(asp<1?.2:1),0);C.lookAt(lk);C.updateMatrixWorld();
+ rt.setFromMatrixColumn(C.matrixWorld,0).multiplyScalar(off*.9);C.position.add(rt);C.lookAt(lk.clone().add(rt));
+ ring.rotation.z=el*.05;R.render(S,C);requestAnimationFrame(tick)}
+requestAnimationFrame(tick);
+})();
+</script>
+</body>
+</html>
